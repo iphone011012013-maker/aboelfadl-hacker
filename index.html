@@ -212,6 +212,35 @@
             box-shadow: 0 0 30px rgba(37, 211, 102, 0.9);
         }
 
+        /* صورة المطور في الجانب الأيمن */
+        .sidDe-image {
+            position: fixed;
+            top: 290px;
+            right: 2O0px;
+            width: 1280px;
+            height: 1270px;
+            border-radius: 50%;
+            border: 3px solid #d9230f;
+            object-fit: cover;
+            box-shadow: 0 0 20px rgba(217, 35, 15, 0.7);
+            z-index: 10;
+            transition: all 0.3s ease;
+        }
+
+        .light-mode .side-image {
+            border: 37px solid #25D366;
+            box-shadow: 0 0 20px rgba(37, 211, 102, 0.7);
+        }
+
+        .side-image:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 30px rgba(217, 35, 15, 0.9);
+        }
+
+        .light-mode .side-image:hover {
+            box-shadow: 0 0 30px rgba(37, 211, 102, 0.9);
+        }
+
         /* المحتوى الرئيسي */
         main {
             flex: 1;
@@ -636,7 +665,7 @@
             
             <!-- متجر القراصنة -->
             <div class="account store" onclick="window.location.href='home.html'">
-                <img src="HACKER.jpeg" alt="صورة المطور" class="side-image"/>
+                <img src="HACKER.jpeg" alt="صورة المطور" class="profile-img"/>
                 <h3>Hacker AboElfadl <span class="emoji">🏴‍☠️</span></h3>
                 <p>اضغط لزيارة </p>
                 <div class="new-item">🔥 جديد</div>
@@ -644,7 +673,7 @@
             
             <!-- متجر القراصنة -->
             <div class="account store" onclick="window.location.href='https://aboelfadl-tools.netlify.app/'">
-                <img src="https://aboelfadl-tools.netlify.app/icons/mahmoud.jpg" alt="صورة المطور" class="side-image"/>
+                <img src="https://aboelfadl-tools.netlify.app/icons/mahmoud.jpg" alt="صورة المطور" />
                 <h3>AboElfadl TOOLS  <span class="emoji">🏴‍☠️</span></h3>
                 <p>اضغط لزيارة </p>
                 <div class="new-item">🔥 جديد</div>
@@ -652,7 +681,7 @@
 
              <!-- متجر القراصنة -->
             <div class="account store" onclick="window.location.href='https://free-tools-hacker.netlify.app/'">
-                <img src="FREE.jpeg" class="side-image"/>
+                <img src="FREE.jpeg" class="sidDe-image"/>
                 <h3>FREE TOOLS HACKER</h3>
                 <p>اضغط لزيارة </p>
                 <div class="new-item">🔥 جديد</div>
