@@ -449,6 +449,68 @@
             .special-section {
                 min-height: 280px;
             }
+            /* 1. خلفية النافذة (Overlay) */
+        .modal {
+            display: none; /* تكون مخفية في البداية */
+            position: fixed; /* تبقى ثابتة حتى مع التمرير */
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.6); /* خلفية سوداء شبه شفافة */
+        }
+
+        /* 2. صندوق النافذة نفسه */
+        .modal-content {
+            background-color: #ffffff;
+            color: #333;
+            margin: 15% auto; /* توسيط النافذة */
+            padding: 25px;
+            border: 1px solid #888;
+            width: 80%;
+            max-width: 500px;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            animation: fadeIn 0.3s;
+        }
+
+        @keyframes fadeIn {
+            from {opacity: 0;}
+            to {opacity: 1;}
+        }
+
+        .modal-content h2 {
+            color: #d9534f; /* لون أحمر للتحذير */
+            margin-top: 0;
+        }
+
+        /* تنسيق للرسالة التحذيرية */
+        .warning-text {
+            color: #444; 
+            font-size: 1.1em;
+            font-weight: 500;
+            line-height: 1.6;
+        }
+
+        /* 3. زر "أتفهم" */
+        .modal-button {
+            background-color: #d9534f;
+            color: white;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 20px;
+            font-weight: bold;
+        }
+
+        .modal-button:hover {
+            background-color: #c9302c;
+        }
         }
     </style>
 </head>
@@ -683,6 +745,20 @@
             </a>
         </div>
     </div>
+    <div id="warningModal" class="modal">
+        <div class="modal-content">
+            <h2>🚨 تنبيه هام جداً</h2>
+            <p>هذه الصفحة تحتوي على أكواد ومفاهيم لأغراض <strong>التوعية والتعليم فقط</strong>.</p>
+            <p>استخدام هذه المعلومات في أنشطة ضارة أو غير قانونية يعرضك للمساءلة القانونية.</p>
+            
+            <p class="warning-text">
+                وهذه الطرق تشبه طرق تمكُّن المخترق من اختراق بياناتك الخاصة. 
+                <br>
+                <strong>توخَّ الحذر من الضغط على روابط غريبة.</strong>
+            </p>
+            <button class="modal-button" id="closeModalBtn">أتفهم وأوافق على المتابعة</button>
+        </div>
+    </div>
     
     <footer id="mainFooter">
         <img src="https://i.imgur.com/7Q6Wl1P.png" alt="شعار القراصنة" style="width: 80px; filter: drop-shadow(0 0 5px var(--pirate-red));">
@@ -720,6 +796,33 @@
         
         // إغلاق النافذة عند النقر خارجها
         document.getElementById('alertOverlay').addEventListener('click', hideAlert);
+    </script>
+    <script>
+        // 1. الحصول على عناصر النافذة
+        var modal = document.getElementById("warningModal");
+        var btn = document.getElementById("closeModalBtn");
+
+        // 2. وظيفة لإغلاق النافذة
+        function closeModal() {
+            modal.style.display = "none";
+        }
+
+        // 3. عرض النافذة بمجرد تحميل الصفحة
+        window.onload = function() {
+            modal.style.display = "block";
+        }
+
+        // 4. إغلاق النافذة عند الضغط على زر "أتفهم"
+        btn.onclick = function() {
+            closeModal();
+        }
+
+        // (اختياري) إغلاق النافذة إذا ضغط المستخدم خارج الصندوق
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                closeModal();
+            }
+        }
     </script>
 </body>
 </html>
