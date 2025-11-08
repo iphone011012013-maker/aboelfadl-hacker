@@ -3,8 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title> AboElfadl Hacker| خدمات رقمية مميزة</title>
+    <title>AboElfadl Hacker | خدمات رقمية مميزة</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- خط تجوال -->
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
     <style>
         :root {
             --pirate-red: #d9230f;
@@ -21,6 +23,7 @@
             font-family: 'Tajawal', sans-serif;
             background-color: #0a0a0a;
             color: white;
+            /* صورة خلفية ثابتة */
             background-image: url('https://i.ibb.co/3mTdXLjd/5097c33e8b3b.jpg');
             background-size: cover;
             background-attachment: fixed;
@@ -28,6 +31,7 @@
             overflow-x: hidden;
         }
         
+        /* طبقة داكنة فوق الخلفية */
         .overlay {
             position: fixed;
             top: 0;
@@ -37,8 +41,88 @@
             background: rgba(5, 5, 15, 0.85);
             z-index: -1;
         }
+
+        /* =========================================
+           تنسيقات النافذة التحذيرية (Modal) - تم دمجها هنا
+           ========================================= */
+        .modal {
+            display: none; /* مخفية في البداية */
+            position: fixed;
+            z-index: 2000; /* أعلى من كل شيء */
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.85); /* خلفية معتمة أكثر */
+            backdrop-filter: blur(5px); /* تأثير ضبابي للخلفية */
+        }
+
+        .modal-content {
+            background-color: #1a1a1a; /* لون خلفية داكن يناسب الثيم */
+            color: #eee;
+            margin: 10% auto;
+            padding: 30px;
+            border: 2px solid var(--pirate-red); /* حدود حمراء */
+            width: 85%;
+            max-width: 550px;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 0 30px rgba(217, 35, 15, 0.5);
+            animation: slideDown 0.4s ease-out;
+        }
+
+        @keyframes slideDown {
+            from {transform: translateY(-50px); opacity: 0;}
+            to {transform: translateY(0); opacity: 1;}
+        }
+
+        .modal-content h2 {
+            color: var(--pirate-red);
+            margin-top: 0;
+            font-size: 1.8rem;
+            border-bottom: 1px dashed var(--pirate-gold);
+            padding-bottom: 15px;
+            margin-bottom: 20px;
+        }
+
+        .modal-content p {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+
+        .warning-text {
+            color: var(--pirate-gold); /* لون ذهبي للتحذير الإضافي */
+            font-weight: bold;
+            background: rgba(240, 163, 10, 0.1);
+            padding: 15px;
+            border-radius: 10px;
+            margin: 25px 0;
+            border: 1px solid var(--pirate-gold);
+        }
+
+        .modal-button {
+            background: linear-gradient(45deg, var(--pirate-red), #a51a0a);
+            color: white;
+            padding: 15px 35px;
+            border: none;
+            border-radius: 30px;
+            cursor: pointer;
+            font-size: 1.1rem;
+            font-weight: bold;
+            transition: all 0.3s;
+            box-shadow: 0 5px 15px rgba(217, 35, 15, 0.4);
+        }
+
+        .modal-button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 25px rgba(217, 35, 15, 0.6);
+        }
         
-        /* القائمة الجديدة */
+        /* =========================================
+           باقي تنسيقات الصفحة الأصلية
+           ========================================= */
         .menu-btn {
             position: fixed;
             top: 20px;
@@ -46,16 +130,16 @@
             background: rgba(30, 20, 20, 0.9);
             border: 2px solid var(--pirate-gold);
             color: var(--pirate-gold);
-            width: 60px;
-            height: 60px;
-            border-radius: 15px;
+            width: 50px;
+            height: 50px;
+            border-radius: 12px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 2rem;
+            font-size: 1.8rem;
             cursor: pointer;
-            z-index: 100;
-            box-shadow: 0 0 20px rgba(240, 163, 10, 0.7);
+            z-index: 1100; /* ليكون فوق العناصر الأخرى ما عدا المودال */
+            box-shadow: 0 0 15px rgba(240, 163, 10, 0.5);
             transition: all 0.3s;
         }
         
@@ -67,28 +151,28 @@
         
         .menu-content {
             position: fixed;
-            top: 90px;
+            top: 80px;
             left: 20px;
-            background: rgba(10, 10, 20, 0.97);
-            border: 3px solid var(--pirate-red);
+            background: rgba(15, 15, 25, 0.98);
+            border: 2px solid var(--pirate-red);
             border-radius: 15px;
             padding: 25px;
-            width: 350px;
-            display: none;
-            z-index: 100;
-            box-shadow: 0 0 30px rgba(217, 35, 15, 0.7);
+            width: 300px;
+            display: none; /* مخفية افتراضياً */
+            z-index: 1100;
+            box-shadow: 0 0 30px rgba(0, 0, 0, 0.8);
             backdrop-filter: blur(10px);
         }
         
         .profile-img {
-            width: 150px;
-            height: 150px;
-            border-radius: 15px;
-            border: 4px solid var(--pirate-gold);
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            border: 3px solid var(--pirate-gold);
             margin: 0 auto 20px;
             display: block;
             object-fit: cover;
-            box-shadow: 0 0 25px var(--pirate-gold);
+            box-shadow: 0 0 20px rgba(240, 163, 10, 0.4);
         }
         
         .developer-contact {
@@ -100,184 +184,174 @@
         
         .developer-contact a {
             color: var(--hacker-green);
-            font-size: 1.2rem;
+            font-size: 1.1rem;
             text-decoration: none;
             transition: all 0.3s;
-            display: inline-block;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
             padding: 8px 15px;
-            border-radius: 5px;
-            background: rgba(0,0,0,0.3);
+            border-radius: 25px;
+            background: rgba(37, 211, 102, 0.1);
+            border: 1px solid var(--hacker-green);
         }
         
         .developer-contact a:hover {
-            text-shadow: 0 0 10px var(--hacker-green);
-            background: rgba(37, 211, 102, 0.2);
+            background: var(--hacker-green);
+            color: black;
+            box-shadow: 0 0 15px var(--hacker-green);
         }
         
         header {
-            padding: 20px;
-            background: linear-gradient(135deg, rgba(20, 20, 30, 0.9), rgba(10, 46, 82, 0.8));
-            border-bottom: 3px solid var(--pirate-gold);
+            padding: 100px 20px 40px;
             text-align: center;
             position: relative;
-            padding-top: 80px;
+            background: linear-gradient(to bottom, rgba(0,0,0,0.8), transparent);
         }
         
         .logo {
             display: flex;
+            flex-direction: column;
             align-items: center;
-            justify-content: center;
             gap: 15px;
-            margin-bottom: 10px;
+            margin-bottom: 20px;
         }
         
         .logo-img {
-            width: 100px;
-            height: 100px;
-            border-radius: 50%;
-            border: 3px solid var(--pirate-gold);
-            object-fit: cover;
-            position: absolute;
-            right: 30px;
-            top: 30px;
-            box-shadow: 0 0 25px var(--pirate-gold);
+            width: 110px;
+            height: 110px;
+            filter: drop-shadow(0 0 10px var(--pirate-gold));
         }
         
         h1 {
             color: var(--pirate-gold);
-            text-shadow: 0 0 10px var(--pirate-red);
+            text-shadow: 0 0 15px rgba(240, 163, 10, 0.5);
             margin: 0;
-            font-size: 2.5rem;
+            font-size: 2.8rem;
+            letter-spacing: 1px;
         }
         
         .non-profit {
             background: linear-gradient(45deg, var(--pirate-red), #a51a0a);
             color: white;
-            padding: 10px 20px;
-            border-radius: 5px;
+            padding: 8px 20px;
+            border-radius: 25px;
             font-weight: bold;
             display: inline-block;
-            margin: 15px auto;
-            font-size: 1.2rem;
-            box-shadow: 0 0 15px var(--pirate-red);
-            border: 1px solid white;
+            margin-top: 20px;
+            font-size: 1rem;
+            box-shadow: 0 5px 15px rgba(217, 35, 15, 0.3);
+            border: 1px solid rgba(255,255,255,0.2);
         }
         
         .sections-container {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 20px;
-            padding: 20px;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 25px;
+            padding: 40px 20px;
             max-width: 1200px;
             margin: 0 auto;
         }
         
         .section {
-            background: rgba(30, 20, 20, 0.85);
+            background: rgba(25, 25, 35, 0.7);
             border-radius: 15px;
-            padding: 20px;
-            border-top: 5px solid var(--pirate-red);
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.6);
-            transition: all 0.3s;
-            min-height: 250px;
+            padding: 25px;
+            border: 1px solid rgba(255,255,255,0.05);
+            border-top: 4px solid var(--pirate-red);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            transition: all 0.3s ease;
+            backdrop-filter: blur(5px);
+            display: flex;
+            flex-direction: column;
         }
         
         .section:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 35px rgba(240, 163, 10, 0.3);
+            transform: translateY(-7px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.7);
+            border-top-color: var(--pirate-gold);
         }
         
         .section-title {
             color: var(--pirate-gold);
-            font-size: 1.4rem;
-            margin-bottom: 15px;
+            font-size: 1.5rem;
+            margin: 0 0 15px 0;
             display: flex;
             align-items: center;
-            gap: 10px;
-            border-bottom: 2px dashed var(--pirate-gold);
-            padding-bottom: 10px;
+            gap: 12px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid rgba(240, 163, 10, 0.2);
         }
         
         .section-content {
             line-height: 1.7;
-            font-size: 1.1rem;
-        }
-        
-        .section-content ul {
-            padding-right: 20px;
-            margin: 10px 0;
-        }
-        
-        .section-content li {
-            margin-bottom: 8px;
+            font-size: 1.05rem;
+            color: #ddd;
+            flex-grow: 1;
         }
         
         .price-tag {
             background: var(--pirate-red);
             color: white;
-            padding: 5px 15px;
-            border-radius: 20px;
+            padding: 10px 25px;
+            border-radius: 25px;
             display: inline-block;
-            margin-top: 15px;
+            margin-top: 20px;
             font-weight: bold;
-            font-size: 1rem;
-        }
-        
-        .note {
-            font-size: 0.9rem;
-            color: #aaa;
-            margin-top: 10px;
-            font-style: italic;
-        }
-        
-        .channel-link {
-            color: var(--pirate-gold);
             text-decoration: none;
-            font-weight: bold;
             transition: all 0.3s;
+            align-self: flex-start;
+            box-shadow: 0 5px 15px rgba(217, 35, 15, 0.3);
         }
-        
-        .channel-link:hover {
-            color: white;
-            text-shadow: 0 0 10px var(--pirate-gold);
+
+        .price-tag:hover {
+            background: #c9200e;
+            transform: scale(1.05);
         }
         
         .contact-btn {
-            display: inline-block;
-            background: linear-gradient(45deg, var(--hacker-green), #2d8c4a);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            background: linear-gradient(45deg, var(--hacker-green), #1e8e3e);
             color: white;
-            padding: 12px 25px;
+            padding: 12px 30px;
             border-radius: 30px;
             text-decoration: none;
             font-weight: bold;
             margin: 10px 5px;
             box-shadow: 0 5px 15px rgba(37, 211, 102, 0.3);
             transition: all 0.3s;
-            font-size: 1rem;
         }
         
         .contact-btn:hover {
-            transform: scale(1.05);
-            box-shadow: 0 8px 20px rgba(37, 211, 102, 0.5);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(37, 211, 102, 0.5);
         }
         
         .telegram-btn {
-            background: linear-gradient(45deg, #0088cc, #005f8c);
+            background: linear-gradient(45deg, #0088cc, #006699);
+            box-shadow: 0 5px 15px rgba(0, 136, 204, 0.3);
+        }
+
+        .telegram-btn:hover {
+             box-shadow: 0 8px 25px rgba(0, 136, 204, 0.5);
         }
         
         footer {
             text-align: center;
-            padding: 30px;
-            background: rgba(20, 20, 30, 0.95);
-            border-top: 3px solid var(--pirate-red);
-            position: relative;
+            padding: 40px 20px;
+            background: rgba(10, 10, 15, 0.95);
+            border-top: 1px solid rgba(217, 35, 15, 0.3);
+            margin-top: 50px;
         }
         
         .cart-btn {
             position: fixed;
-            bottom: 20px;
-            right: 20px;
-            background: rgba(240, 163, 10, 0.9);
+            bottom: 30px;
+            right: 30px;
+            background: var(--pirate-gold);
             color: black;
             width: 60px;
             height: 60px;
@@ -287,69 +361,43 @@
             justify-content: center;
             font-size: 1.5rem;
             cursor: pointer;
-            z-index: 90;
-            box-shadow: 0 0 20px rgba(240, 163, 10, 0.7);
+            z-index: 1000;
+            box-shadow: 0 5px 20px rgba(240, 163, 10, 0.6);
             transition: all 0.3s;
-            border: 2px solid var(--pirate-red);
+            border: 2px solid white;
         }
         
         .cart-btn:hover {
-            transform: scale(1.1);
-            background: var(--pirate-red);
-            color: white;
+            transform: scale(1.1) rotate(10deg);
         }
         
-        /* الأقسام الخاصة */
-        .special-section {
-            grid-column: span 1;
-            min-height: 300px;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-        }
-        
-        .bot-section {
-            background: rgba(10, 30, 20, 0.85);
-            border-color: var(--hacker-green);
-            grid-column: 1 / -1;
-            text-align: center;
-            min-height: 280px;
-        }
-        
-        .trust-channel-section {
-            background: rgba(10, 46, 82, 0.85);
-            border-color: var(--trust-blue);
-            min-height: 300px;
-        }
-        
-        .accounts-section {
-            background: rgba(28, 28, 28, 0.85);
-            border-color: var(--pirate-red);
-            min-height: 300px;
-        }
-        
-        /* الأقسام الجديدة */
         .discounts-section {
             position: fixed;
-            bottom: 20px;
-            left: 20px;
-            background: rgba(217, 35, 15, 0.9);
-            border-radius: 10px;
-            padding: 10px 15px;
-            box-shadow: 0 0 20px rgba(217, 35, 15, 0.7);
-            z-index: 90;
+            bottom: 30px;
+            left: 30px;
+            background: linear-gradient(45deg, var(--pirate-red), #a51a0a);
+            color: white;
+            border-radius: 30px;
+            padding: 12px 25px;
+            box-shadow: 0 5px 20px rgba(217, 35, 15, 0.5);
+            z-index: 1000;
             cursor: pointer;
             transition: all 0.3s;
-            border: 2px solid var(--pirate-gold);
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            border: 2px solid rgba(255,255,255,0.2);
         }
         
         .discounts-section:hover {
-            transform: scale(1.1);
+            transform: scale(1.05);
             background: var(--pirate-gold);
             color: black;
+            border-color: var(--pirate-gold);
         }
         
-        /* نافذة التنبيه */
+        /* نافذة التنبيه العادية (للسلة) */
         .alert-box {
             display: none;
             position: fixed;
@@ -357,46 +405,22 @@
             left: 50%;
             transform: translate(-50%, -50%);
             background: rgba(20, 20, 30, 0.95);
-            border: 3px solid var(--pirate-gold);
+            border: 2px solid var(--pirate-gold);
             border-radius: 15px;
-            padding: 25px;
-            width: 80%;
+            padding: 30px;
+            width: 90%;
             max-width: 400px;
-            z-index: 1000;
-            box-shadow: 0 0 30px rgba(240, 163, 10, 0.7);
+            z-index: 1500;
+            box-shadow: 0 0 50px rgba(0,0,0,0.8);
             text-align: center;
+            backdrop-filter: blur(10px);
         }
         
         .alert-box h3 {
             color: var(--pirate-gold);
             margin-top: 0;
-            font-size: 1.5rem;
-        }
-        
-        .alert-box p {
+            font-size: 1.8rem;
             margin-bottom: 20px;
-            font-size: 1.1rem;
-        }
-        
-        .alert-box .contact-link {
-            color: var(--hacker-green);
-            font-weight: bold;
-            font-size: 1.2rem;
-            text-decoration: none;
-            display: block;
-            margin: 10px 0;
-        }
-        
-        .alert-box .close-btn {
-            background: var(--pirate-red);
-            color: white;
-            border: none;
-            padding: 10px 25px;
-            border-radius: 5px;
-            cursor: pointer;
-            font-weight: bold;
-            margin-top: 15px;
-            font-size: 1rem;
         }
         
         .alert-overlay {
@@ -406,131 +430,75 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.7);
-            z-index: 999;
-        }
-        
-        @media (max-width: 768px) {
-            .sections-container {
-                grid-template-columns: 1fr;
-                padding: 15px;
-            }
-            
-            h1 {
-                font-size: 2rem;
-            }
-            
-            .logo-img {
-                width: 80px;
-                height: 80px;
-                right: 15px;
-                top: 15px;
-            }
-            
-            .menu-content {
-                width: 280px;
-            }
-            
-            .discounts-section, .cart-btn {
-                bottom: 10px;
-                font-size: 0.9rem;
-            }
-            
-            .cart-btn {
-                width: 50px;
-                height: 50px;
-                font-size: 1.3rem;
-            }
-            
-            .section-title {
-                font-size: 1.3rem;
-            }
-            
-            .special-section {
-                min-height: 280px;
-            }
-            /* 1. خلفية النافذة (Overlay) */
-.modal {
-            display: none; /* تكون مخفية في البداية */
-            position: fixed; /* تبقى ثابتة حتى مع التمرير */
-            z-index: 1000;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            overflow: auto;
-            background-color: rgba(0, 0, 0, 0.6); /* خلفية سوداء شبه شفافة */
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 1400;
+            backdrop-filter: blur(3px);
         }
 
-        /* 2. صندوق النافذة نفسه */
-        .modal-content {
-            background-color: #ffffff;
-            color: #333;
-            margin: 15% auto; /* توسيط النافذة */
-            padding: 25px;
-            border: 1px solid #888;
-            width: 80%;
-            max-width: 500px;
-            border-radius: 10px;
-            text-align: center;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-            animation: fadeIn 0.3s;
-        }
-
-        @keyframes fadeIn {
-            from {opacity: 0;}
-            to {opacity: 1;}
-        }
-
-        .modal-content h2 {
-            color: #d9534f; /* لون أحمر للتحذير */
-            margin-top: 0;
-        }
-
-        /* تنسيق للرسالة التحذيرية */
-        .warning-text {
-            color: #444; 
-            font-size: 1.1em;
-            font-weight: 500;
-            line-height: 1.6;
-        }
-
-        /* 3. زر "أتفهم" */
-        .modal-button {
-            background-color: #d9534f;
+        .close-btn {
+            background: #444;
             color: white;
-            padding: 12px 24px;
             border: none;
+            padding: 10px 25px;
             border-radius: 5px;
             cursor: pointer;
-            font-size: 16px;
-            margin-top: 20px;
             font-weight: bold;
+            margin-top: 20px;
+            transition: 0.3s;
         }
+        .close-btn:hover { background: #666; }
 
-        .modal-button:hover {
-            background-color: #c9302c;
+        /* تحسينات الموبايل */
+        @media (max-width: 768px) {
+            h1 { font-size: 2.2rem; }
+            .logo-img { width: 90px; height: 90px; }
+            .sections-container { padding: 20px 15px; gap: 20px; }
+            .cart-btn { width: 50px; height: 50px; font-size: 1.2rem; bottom: 20px; right: 20px; }
+            .discounts-section { padding: 10px 20px; font-size: 0.9rem; bottom: 20px; left: 20px; }
+            .modal-content { width: 90%; padding: 25px 20px; margin: 20% auto; }
         }
     </style>
 </head>
 <body>
     <div class="overlay"></div>
     
+    <!-- =================================== -->
+    <!--       نافذة التحذير الجديدة (Modal)   -->
+    <!-- =================================== -->
+    <div id="warningModal" class="modal">
+        <div class="modal-content">
+            <h2>🚨 تنبيه هام جداً</h2>
+            <p>هذه الصفحة تحتوي على أكواد ومفاهيم لأغراض <strong>التوعية والتعليم فقط</strong>.</p>
+            <p>استخدام هذه المعلومات في أنشطة ضارة أو غير قانونية يعرضك للمساءلة القانونية.</p>
+            
+            <div class="warning-text">
+                وهذه الطرق تشبه طرق تمكُّن المخترق من اختراق بياناتك الخاصة. 
+                <br>
+                <strong>توخَّ الحذر من الضغط على روابط غريبة.</strong>
+            </div>
+            
+            <button class="modal-button" id="closeModalBtn">أتفهم وأوافق على المتابعة</button>
+        </div>
+    </div>
+    <!-- =================================== -->
+
     <!-- زر القائمة -->
-    <div class="menu-btn" onclick="toggleMenu()">📜</div>
+    <div class="menu-btn" onclick="toggleMenu()">
+        <i class="fas fa-bars"></i>
+    </div>
     
     <div class="menu-content" id="menuContent">
         <img src="https://aboelfadl-tools.netlify.app/icons/mahmoud1.jpg" alt="صورة المطور" class="profile-img">
-        <h3 style="color: var(--pirate-gold); text-align: center; font-size: 1.8rem; margin-bottom: 15px;">نبذة عن المطور</h3>
-        <p style="text-align: center; line-height: 1.8; font-size: 1.1rem;">
-            « Mahmoud AboElfadl ☠️<br>
-            <span style="color: var(--pirate-gold);">مطور بوتات تلجرام بكل الانواع</span><br>
-            <span style="color: var(--hacker-green);">ومطور مواقع الويب 🌐</span><br>
-            طالب بكالوريوس الأمن السبراني وشبكات الحاسوب<br>
-            العمر 20 🇪🇬💪 »
+        <h3 style="color: var(--pirate-gold); text-align: center; font-size: 1.5rem; margin-bottom: 15px;">عن المطور</h3>
+        <p style="text-align: center; line-height: 1.6; font-size: 1rem; color: #ddd;">
+            <strong>Mahmoud AboElfadl</strong> ☠️<br>
+            <span style="color: var(--pirate-gold);">مطور بوتات تيليجرام</span><br>
+            <span style="color: var(--hacker-green);">ومطور ويب شامل 🌐</span><br>
+            طالب أمن سيبراني وشبكات<br>
+            🇪🇬
         </p>
         <div class="developer-contact">
-            <a href="https://t.me/Mahmoud_Ibrahim_AboElfadl" target="_blank" class="telegram-link">
+            <a href="https://t.me/Mahmoud_Ibrahim_AboElfadl" target="_blank">
                 <i class="fab fa-telegram"></i> @Mahmoud_Ibrahim_AboElfadl
             </a>
         </div>
@@ -541,289 +509,263 @@
         <i class="fas fa-shopping-cart"></i>
     </div>
     
-    <!-- قسم العروض والتخفيضات المصغر -->
+    <!-- زر بوت التيليجرام -->
     <div class="discounts-section" onclick="window.open('https://t.me/Dera3kDigital_bot', '_blank')">
-        <i class="fas fa-tags">Bot Telegram</i> 
+        <i class="fab fa-telegram-plane"></i> Bot Telegram
     </div>
     
-    <!-- نافذة التنبيه -->
+    <!-- نافذة التنبيه للسلة -->
     <div class="alert-overlay" id="alertOverlay"></div>
     <div class="alert-box" id="alertBox">
-        <h3>لطلب المنتجات</h3>
-        <p>يرجى التواصل معنا عبر الحساب التالي:</p>
-        <a href="https://t.me/Mahmoud_Ibrahim_AboElfadl" class="contact-link" target="_blank">
-            <i class="fab fa-telegram"></i> @Mahmoud_Ibrahim_AboElfadl
+        <h3><i class="fas fa-shopping-basket"></i> لطلب المنتجات</h3>
+        <p style="color: #ddd; margin-bottom: 25px;">يرجى التواصل معنا مباشرة عبر حساب التيليجرام الرسمي:</p>
+        <a href="https://t.me/Mahmoud_Ibrahim_AboElfadl" class="contact-btn telegram-btn" target="_blank" style="width: 100%; box-sizing: border-box; margin: 0;">
+            <i class="fab fa-telegram"></i> تواصل الآن
         </a>
-        <button class="close-btn" onclick="hideAlert()">موافق</button>
+        <button class="close-btn" onclick="hideAlert()" style="margin-top: 25px; background: transparent; border: 1px solid #555;">إغلاق</button>
     </div>
     
     <header id="mainHeader">
-        <img src="https://cdn-icons-png.flaticon.com/128/16139/16139890.png" alt="صورة المطور" class="logo-img">
         <div class="logo">
+            <img src="https://cdn-icons-png.flaticon.com/128/16139/16139890.png" alt="شعار القراصنة" class="logo-img">
             <h1>Hacker AboElfadl</h1>
         </div>
-        <p style="color: #ddd; margin-top: 10px;">خدمات رقمية بجودة قرصانية! 🏴‍☠️</p>
+        <p style="color: #ccc; font-size: 1.2rem; margin-top: 10px;">خدمات رقمية بجودة قرصانية! 🏴‍☠️</p>
         <div class="non-profit">منظمة غير هادفة للربح</div>
     </header>
     
     <div class="sections-container" id="mainContent">
-        <!-- قسم ابلاغ التليجرام -->
+        <!-- قسم 1: تبليغ تيليجرام -->
         <div class="section">
-            <h2 class="section-title"><i class="fas fa-flag"></i> تبليغ عن حساب تيليجرام<i class="fab fa-telegram"></i></h2>
+            <h2 class="section-title">
+                <i class="fab fa-telegram" style="color: #0088cc;"></i> تبليغ حساب تيليجرام
+            </h2>
             <div class="section-content">
-                <p>
-                تقوم هذه الأداة بإرسال بلاغات متعددة بشكل آلي إلى تيليجرام ضد الحساب المخالف. أدخل البيانات المطلوبة وحدد عدد البلاغات ثم اضغط على زر الإرسال لبدء العملية.
-            </p>
-                <a href="تبليغ عن حساب تيليجرام.html" class="price-tag">ارسال ابلاغات</a>
-
-                <p class="note"></p>
+                <p>أداة آلية لإرسال بلاغات متعددة ومكثفة ضد الحسابات المخالفة على منصة تيليجرام. تساعد في إغلاق الحسابات التي تنتهك السياسات بسرعة.</p>
             </div>
+            <a href="تبليغ عن حساب تيليجرام.html" class="price-tag">بدء الإبلاغ</a>
         </div>
         
-        <!-- قسم الإبلاغ عن حساب إنستغرام -->
+        <!-- قسم 2: تبليغ إنستجرام -->
         <div class="section">
-            <h2 class="section-title"><i class="fas fa-flag"></i> تبليغ عن حساب إنستجرام مخالف<i class="fab fa-instegram"></i></h2>
-              <div class="section-content">
-                <p>
-                 أداة آلية لإرسال بلاغات متعددة ومنظمة ضد حسابات إنستغرام المخالفة. أدخل رابط الحساب، اختر نوع البلاغ الأساسي، وحدد العدد المطلوب، ثم اضغط على "بدء الإبلاغ" لمتابعة العملية مباشرة من خلال سجل النتائج.
-            </p>
-                <a href="الإبلاغ عن حساب إنستغرام مخالف.html" class="price-tag">ارسال بلاغات</a>
-                
+            <h2 class="section-title">
+                <i class="fab fa-instagram" style="color: #C13584;"></i> تبليغ حساب إنستجرام
+            </h2>
+             <div class="section-content">
+                <p>منصة منظمة لتقديم بلاغات متكررة ضد حسابات إنستجرام المسيئة أو المزيفة. تتبع حالة البلاغات وتزيد من فرصة إغلاق الحساب المستهدف.</p>
             </div>
+            <a href="الإبلاغ عن حساب إنستغرام مخالف.html" class="price-tag">بدء الإبلاغ</a>
         </div>
         
-        <!-- قسم الإبلاغ عن حساب TIKTOK -->
+        <!-- قسم 3: تبليغ تيك توك -->
         <div class="section">
-            <h2 class="section-title"><i class="fas fa-flag"></i> تبليغ عن حساب TIKTOK مخالف<i class="fab fa-tiktok"></i></h2>
-              <div class="section-content">
-                <p>
-                 منصة الإبلاغ الآلي (TikTok Shield):<p/>
-<p>واجهة متطورة لتنفيذ عمليات إبلاغ مكثفة على منصة تيك توك. تمكنك من استهداف المحتوى المخالف عبر تحديد نوع البلاغ وإرسال عدد كبير من الطلبات بشكل آلي. راقب تقدم العملية من خلال شريط التقدم وعدادات النتائج الفورية..
-            </p>
-                <a href="ابلاغ التيك توك.html" class="price-tag">ارسال البلاغات</a>
-                
+            <h2 class="section-title">
+                <i class="fab fa-tiktok" style="color: #ff0050;"></i> تبليغ حساب TikTok
+            </h2>
+             <div class="section-content">
+                <p>واجهة متطورة (TikTok Shield) لتنفيذ حملات إبلاغ مكثفة على تيك توك. اختر نوع المخالفة واترك النظام يقوم بإرسال الطلبات تلقائياً.</p>
             </div>
+            <a href="ابلاغ التيك توك.html" class="price-tag">بدء الإبلاغ</a>
         </div>
         
-        <!-- قسم AI_programmer -->
-        <div class="section">
-            <h2 class="section-title"><i class="fas fa-rebot"></i> الذكاء الاصطناعي للبرمجه</h2>
-              <div class="section-content">
-                <p>
-                 AI Programmer<p/>
-<p>أداة تفاعلية تعتمد على الذكاء الاصطناعي لمساعدتك في حل المشكلات البرمجية، كتابة الأكواد، وشرح المفاهيم المعقدة. فقط اكتب طلبك البرمجي بوضوح في الحقل المخصص، وسيقوم النظام بتوليد إجابة مفصلة مع أكواد منسقة وجاهزة للنسخ
-            </p>
-                <a href="AI_programmer.html" class="price-tag">AI Programmer</a>
-                
+        <!-- قسم 4: المبرمج الذكي AI -->
+        <div class="section" style="border-top-color: var(--trust-blue);">
+            <h2 class="section-title">
+                <i class="fas fa-robot" style="color: var(--trust-blue);"></i> المبرمج الذكي AI
+            </h2>
+             <div class="section-content">
+                <p>مساعدك الشخصي في البرمجة. اطلب أي كود أو حل لمشكلة برمجية، وسيقوم الذكاء الاصطناعي بتوليد الكود وشرحه لك فوراً.</p>
             </div>
+            <a href="AI_programmer.html" class="price-tag" style="background: var(--trust-blue);">جرب المبرمج AI</a>
         </div>
         
-        <!-- قسم أداة تشفير وفك تشفير HTML -->
-        <div class="section">
-            <h2 class="section-title"><i class="fas fa-file-code"></i>أداة تشفير HTML</h2>
-              <div class="section-content">
-                <p>
-                 أداة تشفير HTML المتكاملة: <p/>
-<p>منصة قوية للمطورين تتيح تشفير أكواد HTML باستخدام أكثر من 10 خوارزميات مختلفة (مثل Base64, Hex, Entities) لحماية الشيفرة المصدرية. بالإضافة إلى ذلك، توفر الأداة إمكانية فك تشفير النصوص، ونسخ النتائج بسهولة، وتشغيل الأكواد المشفرة مباشرة في نافذة جديدة لاختبارها فورًا.
-
-            </p>
-                <a href="أداة_تشفير_وفك_تشفير_HTML.html" class="price-tag">أداة تشفير وفك تشفير HTML</a>
-                
+        <!-- قسم 5: تشفير HTML -->
+        <div class="section" style="border-top-color: var(--hacker-green);">
+            <h2 class="section-title">
+                <i class="fas fa-code" style="color: var(--hacker-green);"></i> تشفير أكواد HTML
+            </h2>
+             <div class="section-content">
+                <p>احمِ الكود المصدري لموقعك باستخدام أدوات تشفير متقدمة (Hex, Base64, وغيرها). تصعّب على الآخرين سرقة تصميمك أو فهم برمجتك.</p>
             </div>
+            <a href="أداة_تشفير_وفك_تشفير_HTML.html" class="price-tag" style="background: var(--hacker-green);">أداة التشفير</a>
         </div>
         
-        <!-- قسم ارقام وهمية -->
+        <!-- قسم 6: أرقام وهمية -->
         <div class="section">
-            <h2 class="section-title"><i class="fas fa-mobile-alt"></i>ارقام وهمية للواتساب</h2>
-              <div class="section-content">
-                <p>
-                 خدمة استقبال الرسائل عبر الإنترنت: <p/>
-<p> أداة قوية تتيح لك الحصول على أرقام هواتف مؤقتة من مختلف دول العالم لاستقبال رسائلSMS وتفعيل الحسابات. يمكنك اختيار دولة معينة أو الحصول على رقم عشوائي، ثم طلب الكود أو عرض آخر رسالة مستلمة على هذا الرقم. الأداة مثالية للحفاظ على خصوصيتك وتجنب مشاركة رقمك الحقيقي.
-
-            </p>
-                <a href="namber.html" class="price-tag">TEMP NAMBER</a>
-                
+            <h2 class="section-title">
+                <i class="fas fa-sms" style="color: var(--pirate-gold);"></i> أرقام تفعيل وهمية
+            </h2>
+             <div class="section-content">
+                <p>احصل على أرقام هواتف مؤقتة من دول مختلفة لاستقبال رسائل SMS وتفعيل الحسابات دون استخدام رقمك الشخصي. (للخصوصية فقط).</p>
             </div>
+            <a href="namber.html" class="price-tag" style="background: #444;">أرقام مؤقتة</a>
         </div>
         
-        <!-- قسم أداة التتبع -->
+        <!-- قسم 7: تتبع IP -->
         <div class="section">
-            <h2 class="section-title"><i class="fas fa-location-arrow"></i>اداه التتبع</h2>
-              <div class="section-content">
-                <p>
-                 // نظام تتبع وتحليل IP //<p/>
-<p>واجهة متطورة للوصول إلى قاعدة بيانات IP العالمية. صُممت لتوفير رؤية شاملة عن أي عنوان IP، حيث تقوم بجلب بيانات حيوية مثل الدولة والمدينة، تفاصيل الشبكة (ASN)، والموقع الجغرافي. الأداة تعرض المعلومات بطريقة منظمة وسهلة القراءة، مما يجعلها أداة لا غنى عنها في صندوق أدواتك الرقمية.
-            </p>
-                <a href="معلومات_IP.html" class="price-tag">معلومات IP</a>
-                
+            <h2 class="section-title">
+                <i class="fas fa-map-marker-alt" style="color: #ff5722;"></i> تتبع وتحليل IP
+            </h2>
+             <div class="section-content">
+                <p>اكتشف الموقع الجغرافي، مزود الخدمة (ISP)، والتفاصيل التقنية لأي عنوان IP. أداة أساسية للتحليل الأمني ومعرفة مصادر الاتصال.</p>
             </div>
+            <a href="معلومات_IP.html" class="price-tag" style="background: #ff5722;">تحليل IP</a>
         </div>
 
-        <!-- قسم أداة تشفير وفك تشفير HTML -->
-        <div class="section">
-            <h2 class="section-title"><i class="fas fa-radiation"></i>الهجوم المتطور</h2>
-              <div class="section-content">
-                <p>
-                 نظام الهجوم المطور (DDoS v3.0):<p/>
-<p>منصة متقدمة لمحاكاة هجمات حجب الخدمة الموزعة. تتيح للمستخدم تحديد الهدف (URL أو IP)، واختيار نوع الهجوم (مثل HTTP Flood أو Slowloris)، وتحديد سرعة الهجوم. توفر الأداة خيارات متعددة مثل الهجوم المباشر، أو عبر بروكسي لزيادة التخفي، أو تفعيل وضع "السرعة القصوى" لتأثير مضاعف. يمكن للمستخدم مراقبة تقدم الهجوم، عدد الطلبات المرسلة، وزمن الاستجابة من خلال لوحة تحكم وإحصائيات فورية.
-            </p>
-                <a href="BLOCK_SITE.html" class="price-tag">BLOCK SITE</a>
-                
+        <!-- قسم 8: اختبار الضغط (DDoS Sim) -->
+        <div class="section" style="border-top-color: #d9230f;">
+            <h2 class="section-title">
+                <i class="fas fa-bomb" style="color: #d9230f;"></i> اختبار الضغط (للمواقع)
+            </h2>
+             <div class="section-content">
+                <p>نظام محاكاة (لأغراض اختبارية فقط) لقياس قدرة تحمل السيرفرات والمواقع أمام ضغط الزيارات العالي (DDoS Simulation).</p>
             </div>
+            <a href="BLOCK_SITE.html" class="price-tag">اختبار الموقع</a>
         </div>
 
-        <!-- قسم أداة تشفير وفك تشفير HTML -->
-        <div class="section">
-            <h2 class="section-title"><i class="fas fa-user-secret"></i></i>FREE TOOLS HACKER</h2>
-              <div class="section-content">
-                <p>
-                ترسانة الهاكر الرقمية:<p/>
-<p>واجهة وصول سريع إلى مجموعة من الأدوات السيبرانية. أدخل معرفك التشغيلي (ID)، اختر مهمتك من قائمة الأدوات المتاحة - سواء كانت استخراج معلومات، نشر صفحات مزورة، أو تتبع الأهداف - وسيقوم النظام بتجهيز الرابط اللازم لتنفيذ العملية. كل أداة مصممة لغرض محدد، مما يمنحك المرونة في اختيار الهجوم المناسب.            </p>
-                <a href="tools/index.html" class="price-tag">TOOLS HACKER</a>
-                
+        <!-- قسم 9: أدوات الهاكر -->
+        <div class="section" style="border-top-color: #000;">
+            <h2 class="section-title">
+                <i class="fas fa-terminal"></i> Free Hacker Tools
+            </h2>
+             <div class="section-content">
+                <p>مجموعة أدوات سيبرانية متنوعة في مكان واحد. تتطلب معرف تشغيل (ID) للوصول. استخدمها بمسؤولية وللتعلم فقط.</p>
             </div>
+            <a href="tools/index.html" class="price-tag" style="background: #000;">دخول الأدوات</a>
         </div>
       
-        <!-- قسم أداة تشفير وفك تشفير HTML -->
+        <!-- قسم 10: صفحات مزورة (Sp0m) -->
         <div class="section">
-            <h2 class="section-title"><i class="fas fa-link"></i></i>Sp0m.co</h2>
-              <div class="section-content">
-                <p>
-                ترسانة صفحات مزورة<p/>
-                <a href="" class="price-tag">صفحات مزوره</a>
-                
+            <h2 class="section-title">
+                <i class="fas fa-mask" style="color: var(--pirate-red);"></i> Sp0m (صفحات اختبار)
+            </h2>
+             <div class="section-content">
+                <p>نماذج لصفحات تسجيل دخول مقلّدة (Phishing Pages) لأغراض التوعية واختبار وعي المستخدمين ضد هجمات الهندسة الاجتماعية.</p>
             </div>
+            <a href="#" class="price-tag" style="opacity: 0.5; cursor: not-allowed;">قريباً...</a>
         </div>
         
-        <!-- قسم قناة التعاملات وثقتنا -->
-        <div class="section trust-channel-section special-section">
-            <h2 class="section-title" style="font-size: 1.5rem;"><i class="fas fa-globe"></i></i>بوابة اللغات العالمية</h2>
-            <div class="section-content" style="font-size: 1.15rem;">
-                <p><strong>نظام الترجمة الفاخر:</strong></p>
-                <p>منصة ترجمة متطورة تجمع بين التصميم الأنيق والأداء الفعال. تتيح لك ترجمة النصوص بسهولة بين مجموعة واسعة من اللغات العالمية. كل ما عليك هو إدخال النص، اختيار لغة المصدر واللغة الهدف، ثم الضغط على زر الترجمة للحصول على نتيجة دقيقة وفورية. الأداة مزودة بميزات إضافية مثل تبديل اللغات بضغطة زر ونسخ النص المترجم بسهولة.</p>
-                
+        <!-- أقسام خاصة -->
+        <!-- ترجمة -->
+        <div class="section special-section" style="border-top-color: var(--trust-blue); background: linear-gradient(to bottom right, rgba(29, 161, 242, 0.1), rgba(10, 10, 20, 0.8));">
+            <h2 class="section-title">
+                <i class="fas fa-language" style="color: var(--trust-blue);"></i> المترجم الفوري
+            </h2>
+            <div class="section-content">
+                <p>نظام ترجمة سريع ودقيق يدعم عشرات اللغات. مثالي لترجمة النصوص التقنية أو المحادثات اليومية بسهولة.</p>
             </div>
-            <a href="ترجمة.html" class="contact-btn" style="background: var(--trust-blue); margin-top: auto; font-size: 1.1rem;"> ترجمة
+            <a href="ترجمة.html" class="contact-btn" style="background: var(--trust-blue); width: auto; align-self: flex-start; margin-top: 15px;">
+                 استخدام المترجم
             </a>
         </div>
 
-        <!-- قسم قناة التعاملات وثقتنا -->
-        <div class="section trust-channel-section special-section">
-            <h2 class="section-title" style="font-size: 1.5rem;"><i class="fas fa-brain"></i></i>مساعد روكس الذكي</h2>
-            <div class="section-content" style="font-size: 1.15rem;">
-                <p><strong>بوابتك إلى عالم المعرفة مع روكس AI:</strong></p>
-                <p>تجربة حوارية فريدة مع مساعدك الذكي "روكس". انطلق في رحلة لاستكشاف الأفكار، حل المشكلات، والحصول على إجابات فورية ودقيقة. النظام مصمم ليفهم أسئلتك ويقدم لك استجابات ذكية، بما في ذلك أكواد برمجية منسقة، كل ذلك ضمن واجهة دردشة عصرية وتفاعلية.
+        <!-- مساعد روكسي -->
+        <div class="section special-section" style="border-top-color: #9c27b0; background: linear-gradient(to bottom right, rgba(156, 39, 176, 0.1), rgba(10, 10, 20, 0.8));">
+            <h2 class="section-title">
+                <i class="fas fa-brain" style="color: #9c27b0;"></i> مساعد Roxy الذكي
+            </h2>
+            <div class="section-content">
+                <p>شات بوت ذكي ومتطور (AI) جاهز للإجابة على أسئلتك، مساعدتك في البحث، أو حتى الدردشة العامة بأسلوب طبيعي.</p>
             </div>
-            <a href="مساعد_ذكي.html" class="contact-btn" style="background: var(--trust-blue); margin-top: auto; font-size: 1.1rem;"> روكسي AI
+            <a href="مساعد_ذكي.html" class="contact-btn" style="background: #9c27b0; width: auto; align-self: flex-start; margin-top: 15px;">
+                 تحدث مع Roxy
             </a>
         </div>
         
-        <!-- قسم حساباتنا -->
-        <div class="section accounts-section special-section">
-            <h2 class="section-title" style="font-size: 1.5rem;"><i class="fas fa-user-circle"></i> حساباتنا 📝</h2>
-            <div class="section-content" style="font-size: 1.15rem;">
-                <p> صفحة الحسابات الرسمية </p>
-                <p><strong>جميع حساباتنا الموثقة في مكان واحد</strong></p>
+        <!-- حساباتنا -->
+        <div class="section special-section" style="grid-column: 1 / -1; text-align: center; align-items: center; border-top-color: var(--pirate-gold);">
+            <h2 class="section-title" style="justify-content: center;">
+                <i class="fas fa-users" style="color: var(--pirate-gold);"></i> حساباتنا الرسمية
+            </h2>
+            <div class="section-content" style="max-width: 600px;">
+                <p>تابعنا على جميع المنصات لتبقى على اطلاع بأحدث الأدوات، الشروحات، والعروض الحصرية.</p>
             </div>
-            <a href="profile.html" class="contact-btn" style="background: var(--accounts-black); border: 1px solid var(--pirate-red); margin-top: auto; font-size: 1.1rem;">
-                <i class="fas fa-external-link-alt"></i> زيارة صفحة الحسابات
+            <a href="profile.html" class="contact-btn" style="background: transparent; border: 2px solid var(--pirate-gold); color: var(--pirate-gold);">
+                <i class="fas fa-link"></i> زيارة صفحة الروابط المجمعة
             </a>
         </div>
-        
         
     </div>
     
-    <div style="text-align: center; padding: 20px;" id="contactSection">
-        <h3 style="color: var(--pirate-gold); margin-bottom: 20px; font-size: 1.4rem;">لطلب أو استفسار:</h3>
-        <div style="display: flex; justify-content: center; gap: 15px; flex-wrap: wrap;">
-            <a href="https://t.me/Mahmoud_Ibrahim_AboElfadl" class="contact-btn" style="font-size: 1.1rem;">
-                <i class="fab fa-telegram"></i> تواصل معنا
+    <div style="text-align: center; padding: 50px 20px;" id="contactSection">
+        <h3 style="color: var(--pirate-gold); margin-bottom: 30px; font-size: 1.8rem;">تواصل معنا</h3>
+        <div style="display: flex; justify-content: center; gap: 20px; flex-wrap: wrap;">
+            <a href="https://t.me/Mahmoud_Ibrahim_AboElfadl" class="contact-btn" style="font-size: 1.1rem; padding: 15px 30px;">
+                <i class="fab fa-telegram-plane"></i> محادثة مباشرة
             </a>
-            <a href="https://t.me/Dera3kDigital_bot" class="contact-btn telegram-btn" style="font-size: 1.1rem;">
-                <i class="fas fa-headset"></i> بوت الدعم
+            <a href="https://t.me/Dera3kDigital_bot" class="contact-btn telegram-btn" style="font-size: 1.1rem; padding: 15px 30px;">
+                <i class="fas fa-robot"></i> بوت الخدمات
             </a>
         </div>
-            <div id="warningModal" class="modal">
-        <div class="modal-content">
-            <h2>🚨 تنبيه هام جداً</h2>
-            <p>هذه الصفحة تحتوي على أكواد ومفاهيم لأغراض <strong>التوعية والتعليم فقط</strong>.</p>
-            <p>استخدام هذه المعلومات في أنشطة ضارة أو غير قانونية يعرضك للمساءلة القانونية.</p>
-            
-            <p class="warning-text">
-                وهذه الطرق تشبه طرق تمكُّن المخترق من اختراق بياناتك الخاصة. 
-                <br>
-                <strong>توخَّ الحذر من الضغط على روابط غريبة.</strong>
-            </p>
-            <button class="modal-button" id="closeModalBtn">أتفهم وأوافق على المتابعة</button>
-        </div>
-    </div>
     </div>
 
-    
     <footer id="mainFooter">
-        <img src="https://i.imgur.com/7Q6Wl1P.png" alt="شعار القراصنة" style="width: 80px; filter: drop-shadow(0 0 5px var(--pirate-red));">
-        <p>© 2025 Hacker Aboelfadl| جميع الحقوق محفوظة</p>
-        <p style="color: var(--pirate-gold); margin-top: 10px;">"الجودة قرصانتنا، والرضا كنزنا!"</p>
+        <img src="https://cdn-icons-png.flaticon.com/128/16139/16139890.png" alt="شعار القراصنة" style="width: 60px; opacity: 0.8; margin-bottom: 15px;">
+        <p>© 2025 Hacker AboElfadl | جميع الحقوق محفوظة</p>
+        <p style="color: var(--pirate-gold); margin-top: 10px; font-size: 0.9rem;">"نحن لا نصنع الأدوات، نحن نصنع الاحتراف."</p>
     </footer>
     
     <script>
-        // تبديل عرض/إخفاء القائمة
+        /* =========================================
+           كود تشغيل النافذة التحذيرية (Modal)
+           ========================================= */
+        window.addEventListener('load', function() {
+            const modal = document.getElementById("warningModal");
+            const closeBtn = document.getElementById("closeModalBtn");
+
+            if (modal && closeBtn) {
+                // عرض النافذة عند التحميل
+                modal.style.display = "block";
+                // منع التمرير في الصفحة الخلفية
+                document.body.style.overflow = "hidden"; 
+
+                // إغلاق النافذة
+                closeBtn.onclick = function() {
+                    modal.style.animation = "fadeOut 0.3s forwards"; // تأثير اختفاء
+                    setTimeout(() => {
+                        modal.style.display = "none";
+                        document.body.style.overflow = "auto"; // إعادة التمرير
+                    }, 300);
+                }
+            }
+        });
+
+        /* =========================================
+           باقي أكواد JavaScript للصفحة
+           ========================================= */
+
+        // القائمة الجانبية
         function toggleMenu() {
             const menu = document.getElementById('menuContent');
-            menu.style.display = menu.style.display === 'block' ? 'none' : 'block';
+            if (menu.style.display === 'block') {
+                menu.style.display = 'none';
+            } else {
+                menu.style.display = 'block';
+            }
         }
         
         // إغلاق القائمة عند النقر خارجها
         document.addEventListener('click', function(event) {
             const menu = document.getElementById('menuContent');
             const btn = document.querySelector('.menu-btn');
-            if (!menu.contains(event.target) && event.target !== btn) {
+            // تأكد من أن العناصر موجودة قبل التحقق
+            if (menu && btn && !menu.contains(event.target) && !btn.contains(event.target)) {
                 menu.style.display = 'none';
             }
         });
         
-        // عرض نافذة التنبيه
+        // نوافذ التنبيه (السلة)
         function showAlert() {
             document.getElementById('alertOverlay').style.display = 'block';
             document.getElementById('alertBox').style.display = 'block';
         }
         
-        // إخفاء نافذة التنبيه
         function hideAlert() {
             document.getElementById('alertOverlay').style.display = 'none';
             document.getElementById('alertBox').style.display = 'none';
         }
         
-        // إغلاق النافذة عند النقر خارجها
         document.getElementById('alertOverlay').addEventListener('click', hideAlert);
     </script>
-    <script>
-        // 1. الحصول على عناصر النافذة
-        var modal = document.getElementById("warningModal");
-        var btn = document.getElementById("closeModalBtn");
-
-        // 2. وظيفة لإغلاق النافذة
-        function closeModal() {
-            modal.style.display = "none";
-        }
-
-        // 3. عرض النافذة بمجرد تحميل الصفحة
-        window.onload = function() {
-            modal.style.display = "block";
-        }
-
-        // 4. إغلاق النافذة عند الضغط على زر "أتفهم"
-        btn.onclick = function() {
-            closeModal();
-        }
-
-        // (اختياري) إغلاق النافذة إذا ضغط المستخدم خارج الصندوق
-        window.onclick = function(event) {
-            if (event.target == modal) {
-                closeModal();
-            }
-        }
-    </script>
-    
 </body>
 </html>
